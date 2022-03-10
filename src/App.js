@@ -33,12 +33,24 @@ function App(props) {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
+      editTask={editTask}
       />
   ));
 
   function addTask(name) {
     const newTask = {id:"todo-"+nanoid(), name: name, completed: false}
     setTasks([...tasks, newTask]);
+  }
+
+  function editTask(id, newName){
+    const editedTaskList = tasks.map(task => {
+      // if this task has the same ID as the edited task
+        if (id === task.id) {
+          //
+          return {...task, name: newName}
+        }
+        return task;
+      });
   }
 
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
